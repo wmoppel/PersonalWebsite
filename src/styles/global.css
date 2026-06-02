@@ -1,1 +1,31 @@
 @import "tailwindcss";
+
+@theme {
+  /* Backgrounds */
+  --color-base: #0a0f1c;       /* page background — deep navy-black */
+  --color-surface: #121a2e;    /* cards / raised sections */
+  --color-surface-2: #1a2440;  /* hover / elevated surfaces */
+
+  /* Text */
+  --color-ink: #e8ecf6;        /* primary text — near white */
+  --color-muted: #93a0bd;      /* secondary / muted text */
+
+  /* Accent */
+  --color-accent: #4d8bff;     /* electric blue */
+  --color-accent-hover: #6ba0ff;
+
+  /* Lines */
+  --color-line: #243149;       /* borders / dividers */
+
+  /* Fonts */
+  --font-display: "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Base defaults so every page starts dark and correctly typeset */
+body {
+  background-color: var(--color-base);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}

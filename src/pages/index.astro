@@ -1,17 +1,17 @@
 ---
-import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Cactoos</title>
-	</head>
-	<body>
-		<h1>Cactoos</h1>
-	</body>
-</html>
+<BaseLayout title="Will Moppel — Game Developer">
+  <main class="min-h-screen flex flex-col items-center justify-center px-6 text-center">
+    <p class="font-body text-accent text-sm uppercase tracking-[0.2em] mb-4">
+      Game Developer · CS @ UNC
+    </p>
+    <h1 class="font-display text-5xl sm:text-7xl font-bold text-ink mb-6">
+      Will Moppel
+    </h1>
+    <p class="font-body text-muted text-lg max-w-xl">
+      Building worlds in Unreal Engine and Blender.
+    </p>
+  </main>
+</BaseLayout>
