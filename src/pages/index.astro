@@ -1,17 +1,22 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import Skills from "../components/Skills.astro";
+import Education from "../components/Education.astro";
+import Projects from "../components/Projects.astro";
+import ContactFooter from "../components/ContactFooter.astro";
 ---
 
-<BaseLayout title="Will Moppel — Game Developer">
-  <main class="min-h-screen flex flex-col items-center justify-center px-6 text-center">
-    <p class="font-body text-accent text-sm uppercase tracking-[0.2em] mb-4">
-      Game Developer · CS @ UNC
-    </p>
-    <h1 class="font-display text-5xl sm:text-7xl font-bold text-ink mb-6">
-      Will Moppel
-    </h1>
-    <p class="font-body text-muted text-lg max-w-xl">
-      Building worlds in Unreal Engine and Blender.
-    </p>
+<BaseLayout title="Will Moppel Portfolio">
+  <SiteHeader />
+  <main>
+    <Hero />
+    <About />
+    <Skills />
+    <Education />
+    <Projects />
   </main>
+  <ContactFooter />
 </BaseLayout>
