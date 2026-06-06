@@ -1,4 +1,5 @@
 ---
+import ProjectCard from "./ProjectCard.astro";
 ---
 <!-- TODO: Expand this section in a later step with game and Blender project showcases
      (video embeds + image galleries). Keep the id="projects" anchor in place. -->
@@ -8,13 +9,14 @@
     <p class="font-body text-muted mb-12">
       Some of my current and past projects!
     </p>
-    <div
-      class="rounded-2xl border-2 border-dashed border-line flex flex-col items-center justify-center py-24 px-6 text-center gap-3"
-    >
-      <p class="font-display text-2xl font-semibold text-muted">Coming Soon</p>
-      <p class="font-body text-sm text-muted max-w-sm">
-        Games!
-      </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <ProjectCard
+        title="The Circle of Life"
+        blurb="Solve puzzles by working with past versions of yourself."
+        cover="/TCOLSS.png"
+        href="/games/the-circle-of-life"
+        tags={["Unreal Engine", "2D Platformer"]}
+      />
     </div>
   </div>
 </section>

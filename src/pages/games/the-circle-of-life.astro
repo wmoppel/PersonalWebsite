@@ -1,0 +1,98 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import GameEmbed from "../../components/GameEmbed.astro";
+
+const EMBED_ID = "4269156";
+const EMBED_WIDTH = 1280;
+const EMBED_HEIGHT = 740;
+
+const COVER = "/TCOLSS.png";
+---
+
+<BaseLayout
+  title="The Circle of Life — Will Moppel"
+  description="2D puzzle platformer built in Unreal Engine. Solve puzzles by working with past versions of yourself."
+>
+  <div class="min-h-screen bg-base">
+
+    <div class="max-w-5xl mx-auto px-6 pt-8 pb-2">
+      <a
+        href="/#projects"
+        class="font-body text-sm text-muted hover:text-accent transition-colors"
+      >
+        ← Back to projects
+      </a>
+    </div>
+
+    <main class="max-w-5xl mx-auto px-6 pb-24">
+
+      <div class="pt-10 pb-12">
+        <h1 class="font-display text-4xl sm:text-5xl font-bold text-ink mb-3">
+          The Circle of Life
+        </h1>
+        <p class="font-body text-lg text-muted">
+          Solve puzzles by working with past versions of yourself.
+        </p>
+      </div>
+
+      <div class="flex justify-center mb-16">
+        <GameEmbed
+          title="The Circle of Life"
+          embedId={EMBED_ID}
+          itchUrl="https://cactusspike.itch.io/the-circle-of-life"
+          cover={COVER}
+          embedWidth={EMBED_WIDTH}
+          embedHeight={EMBED_HEIGHT}
+          accentColor="4d8bff"
+        />
+      </div>
+
+      <!-- Details block -->
+      <div class="mb-16 grid grid-cols-1 sm:grid-cols-3 gap-6 border-t border-line pt-10">
+        <div>
+          <p class="font-body text-xs text-accent uppercase tracking-wider mb-2">Role</p>
+          <p class="font-body text-ink">
+            Developer
+          </p>
+        </div>
+        <div>
+          <p class="font-body text-xs text-accent uppercase tracking-wider mb-2">Engine</p>
+          <p class="font-body text-ink">
+            Unreal Engine
+          </p>
+        </div>
+        <div>
+          <p class="font-body text-xs text-accent uppercase tracking-wider mb-2">Tools &amp; Tech</p>
+          <ul class="flex flex-wrap gap-2 list-none p-0 m-0 mt-1">
+            <li class="font-body text-xs text-muted bg-surface-2 border border-line rounded px-3 py-1">Blueprints</li>
+            <li class="font-body text-xs text-muted bg-surface-2 border border-line rounded px-3 py-1">C++</li>
+            <li class="font-body text-xs text-muted bg-surface-2 border border-line rounded px-3 py-1">Input Capture</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="max-w-3xl space-y-5 font-body text-muted leading-relaxed mb-16">
+        <p>I built this game for a game jam with the theme "rebirth." I wanted to make a 2D platformer, 
+          but I found that a lot of them do the same things, and I wanted to make something different, so I came up with this idea.
+          You start by choosing one of three characters and running through a sequence. Then you pick a different character,
+          and the first character repeats your exact moves, which lets you solve puzzles by working with your past self.</p>
+        <p>After finishing the project, I realized that since the characters record inputs instead of locations,
+          the frame rate can cause some bugs where the characters aren't where they should be. If I were to continue working on this project, I would
+          fix that, probably by stabilizing the frame rate, to make the gameplay smoother in the future.</p>
+      </div>
+
+      <div class="flex flex-wrap gap-4 border-t border-line pt-10">
+        <a
+          href="https://cactusspike.itch.io/the-circle-of-life"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-body text-sm font-semibold px-5 py-2 rounded-lg bg-accent text-ink hover:bg-accent-hover transition-colors"
+        >
+          Play on itch.io ↗
+        </a>
+      </div>
+
+    </main>
+  </div>
+</BaseLayout>

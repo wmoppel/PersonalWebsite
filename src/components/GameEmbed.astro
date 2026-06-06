@@ -1,0 +1,122 @@
+---
+interface Props {
+  title: string;
+  embedId: string;
+  itchUrl: string;
+  cover: string;
+  embedWidth: number;
+  embedHeight: number;
+  accentColor?: string;
+}
+
+const {
+  title,
+  embedId,
+  itchUrl,
+  cover,
+  embedWidth,
+  embedHeight,
+  accentColor = "4d8bff",
+} = Astro.props;
+
+const aspectRatio = `${embedWidth} / ${embedHeight}`;
+---
+
+<div
+  class="game-embed-root flex flex-col items-center gap-4"
+  data-embed-id={embedId}
+  data-itch-url={itchUrl}
+  data-accent-color={accentColor}
+  data-embed-width={String(embedWidth)}
+  data-embed-height={String(embedHeight)}
+  data-title={title}
+>
+  <div
+    class="game-embed-frame relative overflow-hidden rounded-xl border border-line bg-surface shadow-lg"
+    style={`width: ${embedWidth}px; max-width: 100%; aspect-ratio: ${aspectRatio};`}
+  >
+    <div class="game-embed-facade absolute inset-0">
+      <img
+        src={cover}
+        alt={`${title} screenshot`}
+        class="w-full h-full object-cover"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 flex items-center justify-center bg-base/50">
+        <button
+          class="game-embed-play flex items-center justify-center w-16 h-16 rounded-full bg-accent hover:bg-accent-hover transition-colors"
+          aria-label={`Play ${title}`}
+          type="button"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="w-7 h-7 text-ink ml-1"
+            aria-hidden="true"
+          >
+            <path d="M8 5.14v14l11-7-11-7z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <a
+    href={itchUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="font-body text-sm text-muted hover:text-accent transition-colors"
+  >
+    View on itch.io ↗
+  </a>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".game-embed-root").forEach((root) => {
+    const frame = root.querySelector<HTMLElement>(".game-embed-frame");
+    const btn = root.querySelector<HTMLButtonElement>(".game-embed-play");
+    if (!frame || !btn) return;
+
+    const { embedId, itchUrl, accentColor, embedWidth, embedHeight, title } =
+      root.dataset;
+
+    btn.addEventListener("click", () => {
+      frame.querySelector(".game-embed-facade")?.remove();
+
+      const iframe = document.createElement("iframe");
+      iframe.src = `https://itch.io/embed-upload/${embedId}?color=${accentColor}`;
+      iframe.style.cssText =
+        "position:absolute;inset:0;width:100%;height:100%;border:0;";
+      iframe.allowFullscreen = true;
+      iframe.setAttribute("frameborder", "0");
+      iframe.title = title ?? "Game";
+
+      const fallback = document.createElement("a");
+      fallback.href = itchUrl ?? "#";
+      fallback.textContent = `Play ${title ?? "game"} on itch.io`;
+      iframe.appendChild(fallback);
+
+      frame.appendChild(iframe);
+      iframe.focus();
+
+      // Lock page scroll immediately on play.
+      document.documentElement.style.overflow = "hidden";
+
+      // Unlock when the user clicks outside the game frame.
+      document.addEventListener("pointerdown", (e: PointerEvent) => {
+        if (!frame.contains(e.target as Node)) {
+          document.documentElement.style.overflow = "";
+        }
+      });
+
+      // Re-lock when focus enters the iframe. Clicks inside a cross-origin
+      // iframe never fire pointerdown on the parent, but they do blur the
+      // parent window with the iframe as document.activeElement.
+      window.addEventListener("blur", () => {
+        if (document.activeElement === iframe) {
+          document.documentElement.style.overflow = "hidden";
+        }
+      });
+    });
+  });
+</script>
