@@ -1,0 +1,123 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Gallery from "../../components/Gallery.astro";
+---
+
+<BaseLayout
+  title="Dungeon Brawl — Will Moppel"
+  description="Arena-style action platformer built in Unreal Engine. Fight with friends in local co-op combat."
+>
+  <div class="min-h-screen bg-base">
+
+    <div class="max-w-5xl mx-auto px-6 pt-8 pb-2">
+      <a
+        href="/#projects"
+        class="font-body text-sm text-muted hover:text-accent transition-colors"
+      >
+        ← Back to projects
+      </a>
+    </div>
+
+    <main class="max-w-5xl mx-auto px-6 pb-24">
+
+      <!-- Title + tagline -->
+      <div class="pt-10 pb-12">
+        <h1 class="font-display text-4xl sm:text-5xl font-bold text-ink mb-3">
+          Dungeon Brawl
+        </h1>
+        <p class="font-body text-lg text-muted">
+          A four-player local-multiplayer arena platformer.
+        </p>
+      </div>
+
+      <!-- ================================================================
+           TODO: YouTube trailer facade embed goes here.
+           When the trailer is ready, add a facade embed component here:
+           - Build or reuse a lightweight facade (poster image + play button)
+             that loads the YouTube iframe only on click (zero JS cost until played).
+           - Suggested prop shape: <TrailerEmbed youtubeId="VIDEO_ID" poster={posterImage} title="Dungeon Brawl — Trailer" />
+           - Keep it above the screenshot gallery as the primary media moment.
+           ================================================================ -->
+
+      <!-- Screenshot gallery -->
+      <!-- TODO: When screenshots exist, import them from src/assets/ and pass them as the
+           `images` prop instead of using placeholderCount.  Example:
+             import ss1 from "../../assets/dungeon-brawl/screenshot-01.png";
+             import ss2 from "../../assets/dungeon-brawl/screenshot-02.png";
+             // ... etc.
+             <Gallery images={[
+               { src: ss1, alt: "Arena combat with two players", caption: "Co-op arena combat" },
+               { src: ss2, alt: "...", caption: "..." },
+             ]} columns={3} />
+           Remove placeholderCount once real images are wired. -->
+      <div class="mb-16">
+        <Gallery placeholderCount={6} columns={3} />
+      </div>
+
+      <div class="max-w-5xl mb-6">
+        <p class="font-body text-sm text-muted">
+          Art and tileset assets are third-party. All systems, code, and design are my own.
+        </p>
+      </div>
+
+      <!-- Details block -->
+      <div class="mb-16 grid grid-cols-1 sm:grid-cols-3 gap-6 border-t border-line pt-10">
+        <div>
+          <p class="font-body text-xs text-accent uppercase tracking-wider mb-2">Role</p>
+          <p class="font-body text-ink">Solo Developer</p>
+        </div>
+        <div>
+          <p class="font-body text-xs text-accent uppercase tracking-wider mb-2">Engine</p>
+          <p class="font-body text-ink">Unreal Engine 4</p>
+        </div>
+        <div>
+          <p class="font-body text-xs text-accent uppercase tracking-wider mb-2">Tools &amp; Tech</p>
+          <ul class="flex flex-wrap gap-2 list-none p-0 m-0 mt-1">
+            <li class="font-body text-xs text-muted bg-surface-2 border border-line rounded px-3 py-1">Blueprints</li>
+            <li class="font-body text-xs text-muted bg-surface-2 border border-line rounded px-3 py-1">Local Multiplayer</li>
+            <li class="font-body text-xs text-muted bg-surface-2 border border-line rounded px-3 py-1">Dynamic Camera</li>
+            <li class="font-body text-xs text-muted bg-surface-2 border border-line rounded px-3 py-1">Gameplay Systems</li>
+            <li class="font-body text-xs text-muted bg-surface-2 border border-line rounded px-3 py-1">Spawn Systems</li>
+            <li class="font-body text-xs text-muted bg-surface-2 border border-line rounded px-3 py-1">Level Design</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="max-w-5xl space-y-5 font-body text-muted leading-relaxed mb-16">
+        <p>
+          A solo 2D arena platformer for up to four players on a single keyboard, built over about a year in Unreal
+          Engine 4 using Blueprints. The roster is 19 playable heroes, each with its own sprite, controls, and hard-coded
+          abilities ranging from guns and bows to melee and a hero that heals by absorbing fallen bodies. Rather than building
+          19 separate character Blueprints, I drove the whole roster from one player class parameterized by a hero enum, so a
+          single class handles every hero's visuals, input response, and abilities, and each hero can summon from a pool of
+          10 pet types. The eight hand-built arenas play under a data-driven difficulty system set at the level-select screen,
+          which composes a tier, an override that can force the match to a single one of the four enemy types, and a strength
+          modifier into custom matches.
+        </p>
+        <p>
+          The most interesting problem was the camera, since four players sharing one screen can scatter to
+          opposite corners of a level. Each frame it finds the two players who are farthest apart, centers on the
+          midpoint between them, and then zooms in as tightly as it can while still leaving padding around every
+          player so no one gets pushed off screen. It lerps toward that target instead of snapping, which keeps
+          motion smooth as players spread out and close back in, and it clamps against the level bounds so the view
+          never reveals past the edge of the map, with a minimum zoom that stops the framing from getting too tight
+          when everyone clusters together. Input feeds into this from four fixed key clusters, arrows, WASD, IJKL, and
+          the numpad, each normalized to four directions so the scheme stays minimal and playable one-handed.
+        </p>
+        <p>
+          The feature I most want to add is letting players switch heroes mid-match, since moving between 19 very different
+          characters is the most fun part of the game. The groundwork is mostly there: hero behavior is recalculated from a
+          single enum on every input, so changing a player's hero is largely a matter of reassigning that value. The natural place
+          to allow it is the window after a player dies and before they respawn, which also sidesteps any state questions since
+          health and stamina reset on respawn regardless. The main work left is presentation rather than logic, since a few things
+          like the sprite are set once at spawn rather than recalculated, so a clean swap would mean re-running that spawn-time
+          setup and adding a trigger to the respawn flow. It is a small amount of work for the feature I think would most change how the game plays.
+        </p>
+      </div>
+
+      <!-- NOTE: No download, itch.io, or GitHub links — asset licensing prevents distribution. -->
+
+    </main>
+  </div>
+</BaseLayout>
