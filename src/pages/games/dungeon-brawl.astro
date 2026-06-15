@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Gallery from "../../components/Gallery.astro";
 ---
 
 <BaseLayout
@@ -30,28 +29,68 @@ import Gallery from "../../components/Gallery.astro";
         </p>
       </div>
 
-      <!-- ================================================================
-           TODO: YouTube trailer facade embed goes here.
-           When the trailer is ready, add a facade embed component here:
-           - Build or reuse a lightweight facade (poster image + play button)
-             that loads the YouTube iframe only on click (zero JS cost until played).
-           - Suggested prop shape: <TrailerEmbed youtubeId="VIDEO_ID" poster={posterImage} title="Dungeon Brawl — Trailer" />
-           - Keep it above the screenshot gallery as the primary media moment.
-           ================================================================ -->
-
-      <!-- Screenshot gallery -->
-      <!-- TODO: When screenshots exist, import them from src/assets/ and pass them as the
-           `images` prop instead of using placeholderCount.  Example:
-             import ss1 from "../../assets/dungeon-brawl/screenshot-01.png";
-             import ss2 from "../../assets/dungeon-brawl/screenshot-02.png";
-             // ... etc.
-             <Gallery images={[
-               { src: ss1, alt: "Arena combat with two players", caption: "Co-op arena combat" },
-               { src: ss2, alt: "...", caption: "..." },
-             ]} columns={3} />
-           Remove placeholderCount once real images are wired. -->
+      <!-- Video gallery -->
       <div class="mb-16">
-        <Gallery placeholderCount={6} columns={3} />
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+          <figure class="flex flex-col gap-2">
+            <div class="aspect-video overflow-hidden rounded-lg border border-line bg-surface-2">
+              <video
+                autoplay
+                loop
+                muted
+                playsinline
+                preload="metadata"
+                class="w-full h-full object-cover"
+                aria-label="Gameplay clip: dynamic camera framing all four players, zooming to fit as they spread across the arena"
+              >
+                <source src="/media/dungeon-brawl/camera.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <figcaption class="font-body text-sm text-muted">
+              Dynamic camera framing all four players, zooming to fit as they spread across the arena and clamping to the level bounds.
+            </figcaption>
+          </figure>
+
+          <figure class="flex flex-col gap-2">
+            <div class="aspect-video overflow-hidden rounded-lg border border-line bg-surface-2">
+              <video
+                autoplay
+                loop
+                muted
+                playsinline
+                preload="metadata"
+                class="w-full h-full object-cover"
+                aria-label="Gameplay clip: a sample of the 19 heroes, each with distinct movement and abilities"
+              >
+                <source src="/media/dungeon-brawl/heroes.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <figcaption class="font-body text-sm text-muted">
+              A sample of the 19 heroes, each with distinct movement and abilities driven from a single parameterized class.
+            </figcaption>
+          </figure>
+
+          <figure class="flex flex-col gap-2">
+            <div class="aspect-video overflow-hidden rounded-lg border border-line bg-surface-2">
+              <video
+                autoplay
+                loop
+                muted
+                playsinline
+                preload="metadata"
+                class="w-full h-full object-cover"
+                aria-label="Gameplay clip: four-player combat with summoned pets and multiple enemy types active at once"
+              >
+                <source src="/media/dungeon-brawl/combat.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <figcaption class="font-body text-sm text-muted">
+              Four-player combat with summoned pets and multiple enemy types active at once.
+            </figcaption>
+          </figure>
+
+        </div>
       </div>
 
       <div class="max-w-5xl mb-6">
@@ -115,8 +154,6 @@ import Gallery from "../../components/Gallery.astro";
           setup and adding a trigger to the respawn flow. It is a small amount of work for the feature I think would most change how the game plays.
         </p>
       </div>
-
-      <!-- NOTE: No download, itch.io, or GitHub links — asset licensing prevents distribution. -->
 
     </main>
   </div>
