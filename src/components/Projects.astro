@@ -1,8 +1,14 @@
 ---
 import ProjectCard from "./ProjectCard.astro";
+import { getImage } from 'astro:assets';
+import tcolCoverSrc from '../assets/TCOLSS.png';
+import dbCoverSrc from '../assets/DBSS.png';
+import threeDPosterSrc from '../assets/3dposter.jpg';
+
+const tcolCover   = await getImage({ src: tcolCoverSrc,    width: 640, format: 'webp' });
+const dbCover     = await getImage({ src: dbCoverSrc,      width: 640, format: 'webp' });
+const threeDCover = await getImage({ src: threeDPosterSrc, width: 640, format: 'webp' });
 ---
-<!-- TODO: Expand this section in a later step with game and Blender project showcases
-     (video embeds + image galleries). Keep the id="projects" anchor in place. -->
 <section id="projects" class="py-20 px-6">
   <div class="max-w-5xl mx-auto">
     <h2 class="font-display text-3xl sm:text-4xl font-bold text-ink mb-4">Projects</h2>
@@ -13,16 +19,23 @@ import ProjectCard from "./ProjectCard.astro";
       <ProjectCard
         title="The Circle of Life"
         blurb="Solve puzzles by working with past versions of yourself."
-        cover="/TCOLSS.png"
+        cover={tcolCover.src}
         href="/games/the-circle-of-life"
         tags={["Unreal Engine", "Puzzle Platformer"]}
       />
       <ProjectCard
         title="Dungeon Brawl"
         blurb="Fight with friends in this arena style action platformer!"
-        cover="/DBSS.png"
+        cover={dbCover.src}
         href="/games/dungeon-brawl"
         tags={["Unreal Engine", "Action Platformer"]}
+      />
+      <ProjectCard
+        title="3D Animation"
+        blurb="Scene composition, animation, and lighting work created alongside my game projects."
+        cover={threeDCover.src}
+        href="/3d-animation"
+        tags={["Blender", "3D Animation"]}
       />
     </div>
   </div>

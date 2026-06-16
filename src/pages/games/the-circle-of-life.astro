@@ -1,12 +1,14 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import GameEmbed from "../../components/GameEmbed.astro";
+import { getImage } from 'astro:assets';
+import tcolCoverSrc from '../../assets/TCOLSS.png';
 
 const EMBED_ID = "4269156";
 const EMBED_WIDTH = 1280;
 const EMBED_HEIGHT = 740;
 
-const COVER = "/TCOLSS.png";
+const cover = await getImage({ src: tcolCoverSrc, width: EMBED_WIDTH, format: 'webp' });
 ---
 
 <BaseLayout
@@ -31,7 +33,7 @@ const COVER = "/TCOLSS.png";
           The Circle of Life
         </h1>
         <p class="font-body text-lg text-muted">
-          Solve puzzles by working with past versions of yourself.
+          A puzzle platformer where you cooperate with replayed recordings of your past selves.
         </p>
       </div>
 
@@ -40,7 +42,7 @@ const COVER = "/TCOLSS.png";
           title="The Circle of Life"
           embedId={EMBED_ID}
           itchUrl="https://cactusspike.itch.io/the-circle-of-life"
-          cover={COVER}
+          cover={cover.src}
           embedWidth={EMBED_WIDTH}
           embedHeight={EMBED_HEIGHT}
           accentColor="4d8bff"

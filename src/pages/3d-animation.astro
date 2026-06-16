@@ -1,0 +1,72 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Vimeo } from 'astro-embed';
+import { getImage } from 'astro:assets';
+import posterSrc from '../assets/3dposter.jpg';
+
+const reelPoster = await getImage({ src: posterSrc, width: 1440, format: 'webp' });
+---
+
+<BaseLayout
+  title="3D Animation — Will Moppel"
+  description="3D animation, lighting, and scene work created alongside my game projects."
+>
+  <div class="min-h-screen bg-base">
+
+    <div class="max-w-5xl mx-auto px-6 pt-8 pb-2">
+      <a
+        href="/#projects"
+        class="font-body text-sm text-muted hover:text-accent transition-colors"
+      >
+        ← Back to projects
+      </a>
+    </div>
+
+    <main class="max-w-5xl mx-auto px-6 pb-24">
+
+      <!-- Title + tagline -->
+      <div class="pt-10 pb-12">
+        <h1 class="font-display text-4xl sm:text-5xl font-bold text-ink mb-3">3D Animation</h1>
+        <p class="font-body text-lg text-muted">
+          A demo reel of 3D scenes I animated, lit, and composed in Blender.
+        </p>
+      </div>
+
+      <!-- Demo reel -->
+      <div class="mb-12">
+        <div class="rounded-lg border border-line overflow-hidden">
+          <Vimeo
+            id="1201662439"
+            playlabel="Play 3D animation demo reel"
+            poster={reelPoster.src}
+            params="color=4d8bff"
+          />
+        </div>
+      </div>
+
+      <!-- Intro -->
+      <div class="mb-12 max-w-prose space-y-5 font-body text-muted leading-relaxed">
+        <p>
+          The work covers environment blockouts, camera moves, and short cinematic sequences,
+          with the focus on staging a shot, timing the motion, and lighting it for mood.
+        </p>
+        <p>
+          Most of these started as personal projects to improve my game development skills, like a lighting test
+          or a scene layout, and some grew into their own pieces. The animation, camera work,
+          lighting, and scene composition are where my time went, and that is what the reel is meant to show.
+        </p>
+      </div>
+
+      <!-- Attribution callout — required, do not remove -->
+      <div class="mb-12 bg-surface-2 border border-line rounded-lg px-6 py-5">
+        <p class="font-body text-xs text-accent uppercase tracking-wider mb-2">Attribution</p>
+        <p class="font-body text-sm text-muted leading-relaxed">
+          The animation, camera work, lighting, and scene composition are my own. Many of the
+          individual models, textures, and supporting assets come from third-party libraries.
+          What the reel shows is how those pieces are staged, animated, and lit.
+        </p>
+      </div>
+
+    </main>
+  </div>
+</BaseLayout>
